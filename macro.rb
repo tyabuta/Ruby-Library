@@ -7,6 +7,16 @@
 #####################################################################
 
 
+#
+# 指定のディレクトリがGitリポジトリならtrueを返す。
+#
+def DirectoryIsGitRepository(dir)
+    return true if FileTest.directory?(dir) && 
+                   FileTest.directory?(File.join(dir, ".git"))               
+    return false
+end 
+
+
 # 
 # 指定PATHの末尾に拡張子を付加する。
 # path: 既に指定の拡張子が付いている場合は何もしない。
