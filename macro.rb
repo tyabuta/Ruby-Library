@@ -71,3 +71,26 @@ def MediaDVDLabelIsISO9660(label)
 end
 
 
+
+
+if $".include?('tmpdir.rb') then
+
+#
+#  一時ディレクトリを作成し、ブロック構文により
+#  そのディレクトリで作業する事ができる。
+#  ブロック構文を抜けると、元のカレントディレクトリに移動し、
+#  一時ディレクトリは全て削除されます。
+#
+# tmpwork { |tmp_dir| something }
+#
+def tmpwork
+    current_dir = Dir.pwd
+    Dir.mktmpdir { |tmp_dir|
+        Dir.chdir tmp_dir 
+        yield tmp_dir
+        Dir.chdir current_dir
+    }
+end
+
+end # include tmpdir
+
