@@ -133,3 +133,52 @@ end
 
 end # include tmpdir
 
+# -------------------------------------------------------------------
+# SQLite3 functions
+# -------------------------------------------------------------------
+if $".include?('sqlite3.rb') then
+
+#
+# SQLite3接続
+# 失敗時はnilを返す。　
+#
+def DBConnect(dbname)
+    begin
+        return SQLite3::Database.new(dbname)
+    rescue
+    end
+    return nil
+end 
+
+#
+# DB接続を閉じる。
+#
+def DBDisconnect(db)
+    db.clone if (nil != db)
+end
+
+#
+# SQL実行を行う。
+# SQL実行に成功した場合true
+#
+def DBExecute(db, sql, *args)
+    begin
+        db.execute sql, *args
+    rescue
+        return false
+    end
+    return true
+end
+
+#
+# レコードが存在する場合true
+#
+def DBExists(db, sql, *args)
+    db.execute(sql, *args) {
+        return true
+    }
+    return false
+end
+
+end # include sqlite3
+
