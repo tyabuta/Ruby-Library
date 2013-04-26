@@ -13,6 +13,13 @@ def FSScriptBinDir()
     return File.expand_path(File.dirname($0))
 end
 
+#
+# 実行したスクリプトディレクトリから相対的なPathを返す。
+#
+def FSScriptBinRelativePath(relative_path)
+    path = File.join(File.dirname($0), relative_path)
+    return File.expand_path(path)
+end
 
 
 #
