@@ -6,6 +6,12 @@
 #                                                  (c) 2013 tyabuta.
 #####################################################################
 
+#
+# 起動したスクリプト自身のディレクトリPathを取得する。
+#
+def FSScriptBinDir()
+    return File.expand_path(File.dirname($0))
+end
 
 
 
