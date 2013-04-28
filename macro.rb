@@ -184,3 +184,30 @@ end
 
 end # include sqlite3
 
+
+
+# -------------------------------------------------------------------
+# logger functions
+# -------------------------------------------------------------------
+if $".include?('logger.rb') then
+
+#
+# Logの出力関数
+# ログに改行が含まれる場合は'\n'として出力されます。
+# グローバル変数 $_logger を使用します。
+#
+# logname: 関数初回呼び出し時にログPathを指定します。
+#          *省略時は"script.log"というファイル名になります。
+#          *関数呼び出し２回目以降は無視されます。
+#
+def log(msg, logname="script.log")
+    # 初回でインスタンス作成
+    $_logger = Logger.new(logname) if nil==$_logger
+    # 改行は\nとして記録する。
+    $_logger.info(msg.gsub("\n", '\n'))
+end
+
+end # include logger
+
+
+
