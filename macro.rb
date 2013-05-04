@@ -6,6 +6,18 @@
 #                                                  (c) 2013 tyabuta.
 #####################################################################
 
+
+
+#
+# 定数ARGVから、値を取得する。
+#
+#         i: 引数の番号(0ベース)
+# def_value: 値がなかった場合のデフォルト値
+#
+def paramWithArgumentNumber(i, def_value="")
+    return ARGV[i] || def_value
+end
+
 #
 # 起動したスクリプト自身のディレクトリPathを取得する。
 #
