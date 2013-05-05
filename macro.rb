@@ -6,6 +6,16 @@
 #                                                  (c) 2013 tyabuta.
 #####################################################################
 
+
+
+#
+# 指定のモジュールが含まれているか調べる。
+#
+def module_include?(module_name)
+    return $".include?(module_name + '.rb')
+end
+
+
 #
 # 複数の連続するスペース、タブなどを一つのスペースに置換する。
 # 改行文字もスペースとなる。 
@@ -132,7 +142,7 @@ end
 # DateTime functions
 # -------------------------------------------------------------------
 
-if $".include?('date.rb') then
+if module_include? 'date' then
 
 #
 # DateTimeオブジェクトを文字列に変換する。
@@ -160,7 +170,7 @@ end # include date
 # -------------------------------------------------------------------
 # tmpdir functions
 # -------------------------------------------------------------------
-if $".include?('tmpdir.rb') then
+if module_include? 'tmpdir' then
 
 #
 #  一時ディレクトリを作成し、ブロック構文により
@@ -184,7 +194,7 @@ end # include tmpdir
 # -------------------------------------------------------------------
 # SQLite3 functions
 # -------------------------------------------------------------------
-if $".include?('sqlite3.rb') then
+if module_include? 'sqlite3' then
 
 #
 # SQLite3接続
@@ -235,7 +245,7 @@ end # include sqlite3
 # -------------------------------------------------------------------
 # logger functions
 # -------------------------------------------------------------------
-if $".include?('logger.rb') then
+if module_include? 'logger' then
 
 #
 # Logの出力関数
