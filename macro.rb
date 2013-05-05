@@ -128,6 +128,34 @@ def MediaDVDLabelIsISO9660(label)
 end
 
 
+# -------------------------------------------------------------------
+# DateTime functions
+# -------------------------------------------------------------------
+
+if $".include?('date.rb') then
+
+#
+# DateTimeオブジェクトを文字列に変換する。
+# 出力例) 2013/05/05 17:18:03 +09:00
+#
+def StringDateTimeFormat(datetime)
+    return datetime.strftime("%Y/%m/%d %H:%M:%S %Z").to_s
+end
+
+#
+# 下記書式にマッチした文字列から、DateTimeオブジェクトを作成する。
+# 書式が違い、パースに失敗した場合はnilをかえす。
+# 書式例) 2013/05/05 17:18:03 +09:00
+#
+def DateTimeMakeWithString(str_datetime)
+    begin
+        return DateTime.strptime(str_datetime, "%Y/%m/%d %H:%M:%S %Z")
+    rescue
+        return nil
+    end
+end
+
+end # include date
 
 # -------------------------------------------------------------------
 # tmpdir functions
