@@ -8,6 +8,37 @@
 
 
 
+
+#
+# 配列をインデックス付きで出力する。
+# base: 出力するインデックスのベース(省略時はゼロ)
+#
+def ArrayListOutputWithIndex(arr, base=0)
+    arr.each_with_index { |a, i| puts "#{i+base}) #{a}" }
+end
+
+#
+# 配列のインデックスが、範囲ないかしらべる。
+#
+def ArrayIndexInRange(arr, i)
+    return (0 <= i && i < arr.count)
+end
+
+#
+# 選択肢出力用の関数
+# 選択された項目のインデックスを返します。
+# Cancelが選択された場合 -1
+#
+def PromptSelectMenuWithArray(arr, msg)
+    puts msg
+    puts "0) cancel"
+    arr.each_with_index { |a, i| puts "#{i+1}) #{a}" }
+    
+    print ">> "
+    return gets.to_i() -1
+end
+
+
 #
 # 指定のモジュールが含まれているか調べる。
 #
