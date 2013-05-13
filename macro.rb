@@ -33,7 +33,7 @@ def PromptSelectMenuWithArray(arr, msg)
     puts msg
     puts "0) cancel"
     arr.each_with_index { |a, i| puts "#{i+1}) #{a}" }
-    
+
     print ">> "
     return gets.to_i() -1
 end
@@ -49,7 +49,7 @@ end
 
 #
 # 複数の連続するスペース、タブなどを一つのスペースに置換する。
-# 改行文字もスペースとなる。 
+# 改行文字もスペースとなる。
 #
 def StringSingleSpaceReplaceWithMulti(str)
     return str.gsub(/\s+/, " ")
@@ -109,13 +109,13 @@ end
 # 指定のディレクトリがGitリポジトリならtrueを返す。
 #
 def DirectoryIsGitRepository(dir)
-    return true if FileTest.directory?(dir) && 
-                   FileTest.directory?(File.join(dir, ".git"))               
+    return true if FileTest.directory?(dir) &&
+                   FileTest.directory?(File.join(dir, ".git"))
     return false
-end 
+end
 
 
-# 
+#
 # 指定PATHの末尾に拡張子を付加する。
 # path: 既に指定の拡張子が付いている場合は何もしない。
 #  ext: .(ドット)は付けても付けなくても自動で解釈されます。
@@ -214,7 +214,7 @@ if module_include? 'tmpdir' then
 def tmpwork
     current_dir = Dir.pwd
     Dir.mktmpdir { |tmp_dir|
-        Dir.chdir tmp_dir 
+        Dir.chdir tmp_dir
         yield tmp_dir
         Dir.chdir current_dir
     }
@@ -237,7 +237,7 @@ def DBConnect(dbname)
     rescue
     end
     return nil
-end 
+end
 
 #
 # DB接続を閉じる。
