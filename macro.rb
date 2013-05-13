@@ -298,3 +298,23 @@ end # include logger
 
 
 
+
+# -------------------------------------------------------------------
+# git functions
+# -------------------------------------------------------------------
+
+#
+# カレントブランチを取得する。
+# 取得に失敗した場合は空文字列を返す。
+#
+def GitBranchGetCurrent()
+    git_status = `git status 2>&1`
+    if git_status =~ /# On branch (.+)$/ then
+        current_branch = $1
+        return current_branch
+    end
+    return ""
+end
+
+
+
