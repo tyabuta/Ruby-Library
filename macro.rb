@@ -139,8 +139,8 @@ end
 
 
 #
-# y/n の確認を求め、無効な値の場合は繰り返します。
-# y -> true  n -> false
+# y/n の確認を求め、無効な値の場合は繰り返します。(yes|noでも入力可)
+# 戻り値: y -> true  n -> false
 #
 def PromptConfirm(msg)
     while 1
