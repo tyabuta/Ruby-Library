@@ -129,14 +129,32 @@ def PathAppendExtension(path, ext)
 end
 
 
+
 #
-# 標準入力から文字列を取得する
+# 文字列入力
 #
-def StdInString(msg)
-    print msg
+def InputStr()
     return gets.chomp
 end
 
+#
+# 数値入力
+#
+def InputInt()
+    return gets.to_i
+end
+
+#
+# 真偽値入力
+#
+def InputBool()
+    s = gets.chomp.downcase
+    i = s.to_i
+    if "y"==s || "yes"==s || "true"==s || 0!=i then
+        return true
+    end
+    return false
+end
 
 #
 # y/n の確認を求め、無効な値の場合は繰り返します。(yes|noでも入力可)
