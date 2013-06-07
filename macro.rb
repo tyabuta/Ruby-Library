@@ -102,14 +102,14 @@ def FileWriteAppend(filename, str)
     return false
 end
 
-#
+# -------------------------------------------------------------------
 # 正規表現にマッチした行をきっかけに、次の行からファイル読み込みを開始する。
 #
 # file_object: ファイルオブジェクト
 # regex_begin: 読み込みのきっかけとなる正規表現
 #   regex_end: 読み込み終了の合図となる正規表現、
 #              省略した場合はファイルの最後まで読み込みを行う。
-#
+# -------------------------------------------------------------------
 def ReadBeginWithLine(file_object, regex_begin, regex_end=nil)
     buf = ""
     while file_object.gets
