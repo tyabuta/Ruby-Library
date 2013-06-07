@@ -24,20 +24,31 @@ def ArrayIndexInRange(arr, i)
     return (0 <= i && i < arr.count)
 end
 
-#
-# 選択肢出力用の関数
-# 選択された項目のインデックスを返します。
-# Cancelが選択された場合 -1
-#
-def PromptSelectMenuWithArray(arr, msg)
+# -------------------------------------------------------------------
+# プロンプトによる項目の選択関数
+#           arr: 選択項目となる文字列配列
+#           msg: 選択を促す、メッセージ文字列
+# returnByIndex: インデックスで選択項目を返すか。
+#                true (default) -> 選択された項目のインデックスを返します。
+#                                  Cancelが選択された場合 -1
+#                false          -> 選択された項目の文字列を返します。
+#                                  Cancelが選択された場合 nil
+# -------------------------------------------------------------------
+def PromptSelectMenuWithArray(arr, msg, returnByIndex = true)
     puts msg
     puts "0) cancel"
     arr.each_with_index { |a, i| puts "#{i+1}) #{a}" }
 
-    print ">> "
-    return gets.to_i() -1
-end
+    # 入力を求める。
+    print ">> "; idx = gets.to_i() -1
 
+    # インデックス指定の場合、数値を返す。
+    return idx if returnByIndex
+
+    # インデックス指定でない場合、無効値はnilを返す。
+    return nil if -1 == idx
+    return arr[idx]
+end
 
 #
 # 指定のモジュールが含まれているか調べる。
