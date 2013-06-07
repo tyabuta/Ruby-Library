@@ -80,6 +80,16 @@ def FSScriptBinRelativePath(relative_path)
     return File.expand_path(path)
 end
 
+#
+# 指定ファイルに文字列を追記する。
+#
+def FileWriteAppend(filename, str)
+    open(filename, "a") do |f|
+        f.write str
+        return true
+    end
+    return false
+end
 
 #
 # 正規表現にマッチした行をきっかけに、次の行からファイル読み込みを開始する。
