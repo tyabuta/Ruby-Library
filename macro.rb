@@ -341,10 +341,10 @@ def DirectoryIsGitRepository(dir)
     return false
 end
 
-#
+# -------------------------------------------------------------------
 # カレントブランチを取得する。
 # 取得に失敗した場合は空文字列を返す。
-#
+# -------------------------------------------------------------------
 def GitBranchGetCurrent()
     git_status = `git status 2>&1`
     if git_status =~ /# On branch (.+)$/ then
@@ -354,5 +354,42 @@ def GitBranchGetCurrent()
     return ""
 end
 
+
+
+if module_include?('json') && module_include?('net/https') then
+
+# -------------------------------------------------------------------
+# GitHubから、ユーザーのリポジトリ一覧をJSON形式で取得する。
+# ※GitHub APIを利用。
+# レスポンスヘッダが200を返さなかった場合には、
+# 取得失敗としてnilを返します。
+#
+# username: GitHubのユーザー名
+# -------------------------------------------------------------------
+def GitHubUserRepositories(username)
+    # GitHub API
+    url = "https://api.github.com/users/" + username + "/repos"
+
+    # URIに変換
+    uri = URI(url)
+
+    # HTTPSによるレスポンス取得
+    https = Net::HTTP.new(uri.host, uri.port)
+    https.use_ssl     = true
+    https.verify_mode = OpenSSL::SSL::VERIFY_NONE # 証明書を必要としない
+    https.start {
+        response = https.get(uri.path)
+        case response
+        when Net::HTTPOK then
+            # JSONオプジェクトを返す。
+            return JSON.parse(response.body)
+        else
+            # Error
+        end
+    }
+    return nil
+end
+
+end # End of module_include? json net/https
 
 
