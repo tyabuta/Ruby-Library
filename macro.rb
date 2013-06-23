@@ -126,15 +126,6 @@ def ReadBeginWithLine(file_object, regex_begin, regex_end=nil)
 end
 
 
-#
-# 指定のディレクトリがGitリポジトリならtrueを返す。
-#
-def DirectoryIsGitRepository(dir)
-    return true if FileTest.directory?(dir) &&
-                   FileTest.directory?(File.join(dir, ".git"))
-    return false
-end
-
 
 #
 # 指定PATHの末尾に拡張子を付加する。
@@ -337,10 +328,18 @@ end # include logger
 
 
 
+# *******************************************************************
+# git functions
+# *******************************************************************
 
 # -------------------------------------------------------------------
-# git functions
+# 指定のディレクトリがGitリポジトリならtrueを返す。
 # -------------------------------------------------------------------
+def DirectoryIsGitRepository(dir)
+    return true if FileTest.directory?(dir) &&
+                   FileTest.directory?(File.join(dir, ".git"))
+    return false
+end
 
 #
 # カレントブランチを取得する。
