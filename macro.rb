@@ -29,10 +29,12 @@ end
 #           arr: 選択項目となる文字列配列
 #           msg: 選択を促す、メッセージ文字列
 # returnByIndex: インデックスで選択項目を返すか。
-#                true (default) -> 選択された項目のインデックスを返します。
-#                                  Cancelが選択された場合 -1
-#                false          -> 選択された項目の文字列を返します。
-#                                  Cancelが選択された場合 nil
+#                true (default)
+#                    選択された項目のインデックスを返します。
+#                    Cancel、または無効値が選択された場合 -1
+#                false
+#                    選択された項目の文字列を返します。
+#                    Cancel、または無効値が選択された場合 nil
 # -------------------------------------------------------------------
 def PromptSelectMenuWithArray(arr, msg, returnByIndex = true)
     puts msg
@@ -42,6 +44,11 @@ def PromptSelectMenuWithArray(arr, msg, returnByIndex = true)
     # 入力を求める。
     print ">> "; idx = gets.to_i() -1
 
+    # 無効値の場合は全て-1に統一する。
+    if idx < 0 || arr.count < idx + 1 then
+        idx = -1
+    end
+
     # インデックス指定の場合、数値を返す。
     return idx if returnByIndex
 
@@ -49,6 +56,7 @@ def PromptSelectMenuWithArray(arr, msg, returnByIndex = true)
     return nil if -1 == idx
     return arr[idx]
 end
+
 
 #
 # 指定のモジュールが含まれているか調べる。
